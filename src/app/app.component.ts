@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from './student';
 import { StudentService } from './student.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,13 +15,12 @@ export class AppComponent implements OnInit{
     this.getStudents();
   }
   public getStudents(): void {
-    this.studentService.getStudents().subscribe(
-      (response: Student[]) => {
-        this.students = response;
-      },
-      (error: Error) => {
-        console.log(error.message);
+    this.studentService.getStudents().subscribe((res)=>{
+      try{
+        this.students = res;
+      }catch(e){
+        console.log(e);
       }
-    );
+    })
   }
 }
