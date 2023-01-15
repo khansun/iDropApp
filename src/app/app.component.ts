@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Student } from './student';
 import { StudentService } from './student.service';
 import { NgForm } from '@angular/forms';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,16 +14,30 @@ export class AppComponent implements OnInit{
   public students: Student[] = [];
   public deleteStudent: Student;
   public editStudent: Student;
+  public pageSlice: Student[] = [];
   
   constructor (private studentService: StudentService) {}
   ngOnInit(): void {
-    this.getStudents();
-    
+    this.getStudents(); 
+  }
+
+  public onPaginateChange(event): void {
+    const startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    if (endIndex > this.students.length) {
+      endIndex = this.students.length;
+    }
+    this.pageSlice = this.students.slice(startIndex, endIndex);
   }
   public getStudents(): void {
     this.studentService.getStudents().subscribe((res)=>{
       try{
         this.students = res;
+        if(this.students.length > 6){
+          this.pageSlice = this.students.slice(0, 6);
+        }else{
+          this.pageSlice = this.students;
+        }
       }catch(e){
         console.log(e);
       }
@@ -31,7 +46,7 @@ export class AppComponent implements OnInit{
   public onDeleteStudent(id: number): void {
     this.studentService.deleteStudent(id).subscribe(
       (response: Student) => {
-        console.log(response);
+        //console.log(response);
         this.getStudents();
       },
       (error: HttpErrorResponse) => {
@@ -44,7 +59,7 @@ export class AppComponent implements OnInit{
     document.getElementById('add-student-form').click();
     this.studentService.addStudent(addForm.value).subscribe(
       (response: Student) => {
-        console.log(response);
+        //console.log(response);
         this.getStudents();
         addForm.reset();
       },
@@ -59,7 +74,7 @@ export class AppComponent implements OnInit{
   public onUpdateStudent(student: Student): void {
     this.studentService.updateStudent(student).subscribe(
       (response: Student) => {
-        console.log(response);
+        //console.log(response);
         this.getStudents();
       },
       (error: HttpErrorResponse) => {
@@ -87,7 +102,7 @@ export class AppComponent implements OnInit{
     }
     container.appendChild(button);
     button.click();
-    console.log(student, mode);
+    //console.log(student, mode);
 
   }
 }

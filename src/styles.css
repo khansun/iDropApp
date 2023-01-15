@@ -43,6 +43,7 @@ body{
     max-width: 100%;
     height: auto;
 }
+
 .text-pink {
     color: #ff679b!important;
 }
@@ -56,3 +57,5 @@ h4 {
     line-height: 22px;
     font-size: 18px;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

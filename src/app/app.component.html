@@ -20,7 +20,7 @@
 
 <div class="container" id="student-container">
         <div class="row">
-            <div *ngFor="let student of students" class="col-lg-4">
+            <div *ngFor="let student of pageSlice" class="col-lg-4">
                 <div class="text-center card-box">
                     <div class="member-card pt-2 pb-2">
                         <div class="thumb-lg member-thumb mx-auto"><img src={{student.photoURL}} class="rounded-circle img-thumbnail" alt="profile-image"></div>
@@ -34,7 +34,7 @@
                             <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
                         </ul>
 
-                        <a (click)="onOpenStudentModal(student, 'delete')" class="btn btn-danger" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                        <a (click)="onOpenStudentModal(student, 'delete')" class="btn btn-outline-danger" data-placement="top" data-original-title="Delete"><i class="fa fa-trash"></i></a>
 
 
 
@@ -55,7 +55,7 @@
                                 <div class="col-4">
                                     <div class="mt-3">
                                         
-                                        <a (click)="onOpenStudentModal(student, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i> </a> 
+                                        <a (click)="onOpenStudentModal(student, 'edit')" class="btn btn-outline-primary" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i> </a> 
 
                                     </div>
                                 </div>
@@ -198,6 +198,12 @@
       <h4 class="alert-heading">NO STUDENTS!</h4>
       <p>No Students were found! Please utilize the 'Add Student' option.</p>
     </div>
-    </div>
+   </div>
 
-    <!-- container -->
+   <mat-paginator [length]="students?.length"
+              [pageSize]="6"
+              [pageSizeOptions]="[6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96, 102]"
+              (page)="onPaginateChange($event)" aria-label="Select page">
+            
+              
+   </mat-paginator>
