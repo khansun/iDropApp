@@ -1,31 +1,24 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="content">
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" style="color:white;">iDrop</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor02">
-       <ul class="navbar-nav mr-auto">
-       </ul>
-       <form class="form-inline my-2 my-lg-0">
-        <button type="button" class="btn btn-success">Add Student</button>
-       </form>
-    </div>
-  </nav>
 
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<a class="navbar-brand" style="color:white;">iDrop</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+    <button type="button" class="btn btn-success">Add Student</button>
+    </form>
+</div>
+</nav>
 
 
-
-
-
-
-
-    <div class="container">
+<div class="container" id="student-container">
         <div class="row">
             <div *ngFor="let student of students" class="col-lg-4">
                 <div class="text-center card-box">
@@ -40,7 +33,11 @@
                             <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
                             <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
                         </ul>
-                        <button type="button" class="btn btn-danger">Delete</button>
+
+                        <a (click)="onOpenStudentModal(student, 'delete')" class="btn btn-danger" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                        <!-- <button type="button" class="btn btn-danger">Delete</button> -->
+
+
                         <div class="mt-4">
                             <div class="row">
                                 <div class="col-4">
@@ -57,7 +54,10 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="mt-3">
-                                      <button class="btn"><i class="fa fa-edit"></i></button>
+                                        
+                                        <a (click)="onOpenStudentModal(student, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i> </a> 
+
+
                                     </div>
                                 </div>
                             </div>
@@ -69,6 +69,41 @@
  
             <!-- end col -->
         </div>
+
+
+  <!-- Delete Modal -->
+  <div class="modal fade" id="deleteStudentModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="deleteModelLabel">Delete {{deleteStudent?.name}}</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <p>Are you sure you want to delete this student?</p>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button (click)="onDeleteStudent(deleteStudent?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+             </div>
+          </div>
+       </div>
     </div>
+  </div>
+
+
+
+
+
+    </div>
+
+  
+  <div *ngIf="students?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">NO STUDENTS!</h4>
+      <p>No Students were found. Please use the 'Add Student' option.</p>
+    </div>
+    </div>
+
     <!-- container -->
-</div>
