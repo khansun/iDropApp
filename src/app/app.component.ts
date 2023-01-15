@@ -39,6 +39,21 @@ export class AppComponent implements OnInit{
     );
   }
 
+  public onAddStudent(addForm: NgForm): void {
+    document.getElementById('add-student-form').click();
+    this.studentService.addStudent(addForm.value).subscribe(
+      (response: Student) => {
+        console.log(response);
+        this.getStudents();
+        addForm.reset();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+        addForm.reset();
+      }
+    );
+  }
+
   public onOpenStudentModal(student: Student, mode: string): void {
     const container = document.getElementById("student-container");
     const button = document.createElement('button');
