@@ -12,6 +12,7 @@ export class AppComponent implements OnInit{
   title = 'iDropApp';
   public students: Student[] = [];
   public deleteStudent: Student;
+  public editStudent: Student;
   
   constructor (private studentService: StudentService) {}
   ngOnInit(): void {
@@ -53,6 +54,19 @@ export class AppComponent implements OnInit{
       }
     );
   }
+ 
+
+  public onUpdateStudent(student: Student): void {
+    this.studentService.updateStudent(student).subscribe(
+      (response: Student) => {
+        console.log(response);
+        this.getStudents();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      });
+    }
+
 
   public onOpenStudentModal(student: Student, mode: string): void {
     const container = document.getElementById("student-container");
@@ -64,7 +78,8 @@ export class AppComponent implements OnInit{
       button.setAttribute('data-target', '#addStudentModal');
     }
     else if(mode === 'edit'){
-      button.setAttribute('data-target', '#updateStudentModal');
+      this.editStudent = student;
+      button.setAttribute('data-target', '#editStudentModal');
     }
     else if(mode === 'delete'){
       this.deleteStudent = student;

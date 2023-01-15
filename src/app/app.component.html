@@ -57,7 +57,6 @@
                                         
                                         <a (click)="onOpenStudentModal(student, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i> </a> 
 
-
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +98,7 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
           <div class="modal-header">
-             <h5 class="modal-title" id="addStudentModalLabel">Add Student</h5>
+             <h5 class="modal-title" id="addStudentModalLabel">Student Information</h5>
              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
              </button>
@@ -109,23 +108,23 @@
              <form #addStudentForm="ngForm" (ngSubmit)="onAddStudent(addStudentForm)">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name" required>
+                    <input type="text" ngModel name="name" class="form-control" id="name" placeholder="John Doe" required>
                  </div>
                  <div class="form-group">
                     <label for="department">Department</label>
-                    <input type="text" ngModel name="department" class="form-control" id="department" placeholder="Department" required>
+                    <input type="text" ngModel name="department" class="form-control" id="department" placeholder="TVE" required>
                  </div>
                  <div class="form-group">
                     <label for="address">Room Number</label>
-                    <input type="text" ngModel name="roomNumber" class="form-control" id="roomNumber" placeholder="Room Number" required>
+                    <input type="text" ngModel name="roomNumber" class="form-control" id="roomNumber" placeholder="UB 000" required>
                  </div>
                  <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="number" ngModel name="phoneNumber" class="form-control" id="phoneNumber" placeholder="Phone Number" required>
+                    <input type="number" ngModel name="phoneNumber" class="form-control" id="phoneNumber" placeholder="0145678910" required>
                  </div>
                  <div class="form-group">
                     <label for="photo">Photo URL</label>
-                    <input type="text" ngModel name="photoURL" class="form-control" id="photoURL" placeholder="Photo URL" required>
+                    <input type="text" ngModel name="photoURL" class="form-control" id="photoURL" placeholder="https://www.bootdey.com/img/Content/avatar/avatar1.png" required>
                  </div>
                  <div class="modal-footer">
                     <button type="button" id="add-student-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -138,6 +137,59 @@
     </div>
   </div>
 
+
+
+    <!-- Edit Student Modal -->
+    <div class="modal fade" id="editStudentModal" tabindex="-1" role="dialog" aria-labelledby="editStudentModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="editStudentModalLabel">Edit {{editStudent?.name}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form #editStudentForm="ngForm">
+                        <div class="form-group">
+                            <label for="name">ID</label>
+                            <input type="text" ngModel="{{editStudent?.id}}" name="id" class="form-control" id="name" aria-describedby="emailHelp" placeholder="ID" readonly>
+                         </div>
+ 
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" ngModel="{{editStudent?.name}}" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">
+                         </div>
+
+                         <div class="form-group">
+                            <label for="name">Department</label>
+                            <input type="text" ngModel="{{editStudent?.department}}" name="department" class="form-control" id="department" aria-describedby="emailHelp" placeholder="Name">
+                         </div>
+                        
+                         <div class="form-group">
+                            <label for="name">Room Number</label>
+                            <input type="text" ngModel="{{editStudent?.roomNumber}}" name="roomNumber" class="form-control" id="roomNumber" aria-describedby="emailHelp" placeholder="Name">
+                         </div>
+
+                         <div class="form-group">
+                            <label for="name">Phone Number</label>
+                            <input type="text" ngModel="{{editStudent?.phoneNumber}}" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="emailHelp" placeholder="Name">
+                         </div>
+                         
+                         <div class="form-group">
+                            <label for="name">Photo URL</label>
+                            <input type="text" ngModel="{{editStudent?.photoURL}}" name="photoURL" class="form-control" id="photoURL" aria-describedby="emailHelp" placeholder="Name">
+                         </div>
+                         <div class="modal-footer">
+                        
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                       <button (click)="onUpdateStudent(editStudentForm.value)" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                    </div>
+                </form>
+                 </div>
+
+            </div>
+        </div>
     </div>
 
   
