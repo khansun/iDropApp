@@ -1,13 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Student } from './student';
 import { StudentService } from './student.service';
 import { NgForm } from '@angular/forms';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit{
   title = 'iDropApp';
@@ -15,6 +17,8 @@ export class AppComponent implements OnInit{
   public deleteStudent: Student;
   public editStudent: Student;
   public pageSlice: Student[] = [];
+  public isLoading: boolean = false;
+
   
   constructor (private studentService: StudentService) {}
   ngOnInit(): void {
@@ -44,18 +48,23 @@ export class AppComponent implements OnInit{
     this.pageSlice = this.students.slice(startIndex, endIndex);
   }
   public getStudents(): void {
-    this.studentService.getStudents().subscribe((res)=>{
-      try{
-        this.students = res;
-        if(this.students.length > 6){
-          this.pageSlice = this.students.slice(0, 6);
-        }else{
-          this.pageSlice = this.students;
+    this.isLoading = true;
+    console.log(this.isLoading);
+      this.studentService.getStudents().subscribe((res)=>{
+        try{
+          this.students = res;
+          if(this.students.length > 6){
+            this.pageSlice = this.students.slice(0, 6);
+          }else{
+            this.pageSlice = this.students;
+          }
+          this.isLoading = false;
+        }catch(e){
+          console.log(e);
+          this.isLoading = false;
         }
-      }catch(e){
-        console.log(e);
-      }
-    })
+      });
+    
   }
   public onDeleteStudent(id: number): void {
     this.studentService.deleteStudent(id).subscribe(

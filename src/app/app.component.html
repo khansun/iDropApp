@@ -23,6 +23,9 @@
 
 
 <div class="container" id="student-container">
+   <div style="display: flex; justify-content: center;">
+      <mat-spinner  *ngIf="this.isLoading" color="primary"></mat-spinner>
+   </div>
         <div class="row">
             <div *ngFor="let student of pageSlice" class="col-lg-4">
                 <div class="text-center card-box">
@@ -60,7 +63,7 @@
                                     <div class="mt-3">
                                         
                                         <a (click)="onOpenStudentModal(student, 'edit')" class="btn btn-outline-primary" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i> </a> 
-
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +105,7 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
           <div class="modal-header">
-             <h5 class="modal-title" id="addStudentModalLabel">Student Information</h5>
+             <h5 class="modal-title" id="addStudentModalLabel" class="font-style">Student Information</h5>
              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
              </button>
@@ -197,7 +200,7 @@
     </div>
 
   
-  <div *ngIf="students?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div *ngIf="students?.length == 0 && this.isLoading == false" class="col-lg-12 col-md-12 col-xl-12">
     <div class="alert alert-info" role="alert">
       <h4 class="alert-heading">NO STUDENTS!</h4>
       <p>No Students were found! Please utilize the 'Add Student' option.</p>

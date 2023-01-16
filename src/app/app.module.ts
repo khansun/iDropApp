@@ -6,7 +6,7 @@ import { StudentService } from './student.service';
 import { FormsModule } from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
 @NgModule({
   declarations: [
     AppComponent
@@ -16,7 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatPaginatorModule    
+    MatPaginatorModule,
+    MatProgressSpinnerModule    
   ],
   providers: [StudentService],
   bootstrap: [AppComponent]
