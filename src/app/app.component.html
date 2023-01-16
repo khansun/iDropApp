@@ -12,6 +12,10 @@
     <ul class="navbar-nav mr-auto">
     </ul>
     <form class="form-inline my-2 my-lg-0">
+      <input type="search" (ngModelChange)="onSearchStudents(key.value)" #key="ngModel" ngModel
+       name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search students..." required>
+   </form>
+    <form class="form-inline my-2 my-lg-0">
     <button (click)="onOpenStudentModal(null, 'add')" class="btn btn-success" data-dismiss="modal">Add Student</button>
     </form>
 </div>

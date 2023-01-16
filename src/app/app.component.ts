@@ -21,6 +21,20 @@ export class AppComponent implements OnInit{
     this.getStudents(); 
   }
 
+  public onSearchStudents(key: string): void {
+    const results: Student[] = [];
+    for (const student of this.students) {
+      if (student.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || "0".concat(String(student.phoneNumber)).indexOf(key.toLowerCase()) !== -1)
+        {
+        results.push(student);
+        }
+    }
+    this.pageSlice = results;
+    if (results.length === 0 || !key) {
+      this.getStudents();
+    }
+  }
   public onPaginateChange(event): void {
     const startIndex = event.pageIndex * event.pageSize;
     let endIndex = startIndex + event.pageSize;
