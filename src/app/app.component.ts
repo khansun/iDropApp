@@ -3,7 +3,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Student } from './student';
 import { StudentService } from './student.service';
 import { NgForm } from '@angular/forms';
-import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -49,7 +48,10 @@ export class AppComponent implements OnInit{
   }
   public getStudents(): void {
     this.isLoading = true;
-    console.log(this.isLoading);
+    
+    // console.log(this.isLoading);
+    setTimeout(() => {
+    
       this.studentService.getStudents().subscribe((res)=>{
         try{
           this.students = res;
@@ -64,7 +66,7 @@ export class AppComponent implements OnInit{
           this.isLoading = false;
         }
       });
-    
+    }, 2000); 
   }
   public onDeleteStudent(id: number): void {
     this.studentService.deleteStudent(id).subscribe(
