@@ -60,6 +60,7 @@ body {
   -webkit-transform: scale(.95);
   -ms-transform: scale(.95);
   z-index: -1;
+  display: none;
 }
 .login-wrapper .example-form {
   min-width: 100%;

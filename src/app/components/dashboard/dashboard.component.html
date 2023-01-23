@@ -1,33 +1,35 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">   
-    <a href="/dashboard"><img class="navbar-brand" src="../assets/complaint.png" style="width:28px; color: white;" alt="iDrop"></a>
- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
- <span class="navbar-toggler-icon"></span>
- </button>
- <div class="collapse navbar-collapse" id="navbarColor02">
-     <ul class="navbar-nav mr-auto">
-     </ul>
-     <form class="form-inline my-2 my-lg-0">
-       <input type="search" (ngModelChange)="onSearchStudents(key.value)" #key="ngModel" ngModel
-        name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search students..." required>
-    </form>
-     <form class="form-inline my-2 my-lg-0">
-     <button (click)="onOpenStudentModal(null, 'add')" class="btn btn-success" data-dismiss="modal">Add Student</button>
-     </form>
-     <form class="form-inline my-3 my-lg-1">
-       <a class="btn btn-outline-danger" routerLink="../login" routerLinkActive="active">Logout</a>
-       </form>
- </div>
- 
- 
- </nav>
- 
+
  
  <div class="container" id="student-container">
  
-    <div style="display: flex; justify-content: center;">
- 
-       <mat-spinner  *ngIf="this.isLoading" color="secondary"></mat-spinner>
+    <div >
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">   
+            <a href="/dashboard"><img class="navbar-brand" src="../assets/complaint.png" style="width:28px; color: white;" alt="iDrop"></a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarColor02">
+             <ul class="navbar-nav mr-auto">
+             </ul>
+             <form class="form-inline my-2 my-lg-0">
+               <input type="search" (ngModelChange)="onSearchStudents(key.value)" #key="ngModel" ngModel
+                name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search students..." required>
+            </form>
+             <form class="form-inline my-2 my-lg-0">
+             <button (click)="onOpenStudentModal(null, 'add')" class="btn btn-success" data-dismiss="modal">Add Student</button>
+             </form>
+             <form class="form-inline my-3 my-lg-1">
+               <a class="btn btn-outline-danger" routerLink="../login" routerLinkActive="active">Logout</a>
+               </form>
+         </div>
+         
+         
+         </nav>
+         <div style="display: flex; justify-content: center;">
+            <mat-spinner  *ngIf="isLoading" color="secondary"></mat-spinner>
+         </div>
+       
     </div>
          <div class="row">
              <div *ngFor="let student of pageSlice" class="col-lg-4">
