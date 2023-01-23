@@ -1,0 +1,37 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+    <form class="example-form">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Username">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Choose a role...</mat-label>
+          <mat-select>
+            <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+      
+    
+
+    </form>
+    <div  style="display: flex; justify-content: center;" >
+        <button mat-stroked-button color="accent" class="btn btn-outline-primary" >Register</button>
+        
+    </div>
+    <a>Already Registered?</a>
+    <a class="btn btn-link" routerLink="../login" routerLinkActive="active">Login</a>
+  </mat-card>
+  
+</div>
