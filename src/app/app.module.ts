@@ -13,7 +13,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import {MatSelectModule} from '@angular/material/select';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
+import {ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +24,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     DashboardComponent
   ],
   imports: [
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     MatSelectModule,
     BrowserModule,
