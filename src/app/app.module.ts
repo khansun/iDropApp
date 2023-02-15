@@ -16,12 +16,15 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { AlertComponent } from './components/alert/alert.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    AlertComponent
   ],
   imports: [
     MatInputModule,

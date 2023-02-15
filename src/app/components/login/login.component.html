@@ -1,9 +1,11 @@
-<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" style="display: flex; justify-content: center;" >
 
     <mat-card class="box">
       <mat-card-header>
         <mat-card-title>iDrop</mat-card-title>
       </mat-card-header>
+
+
       <form #loginForm="ngForm">
         <div class="form-group">
 
@@ -14,15 +16,22 @@
 
           <input type="password" ngModel name="password" class="form-control" id="password" placeholder="Password" required>
          </div>
-         <div class="modal-footer">
+         <div class="modal-footer"  style="display: flex; justify-content: center;">
   
+
+
        <button [disabled]="loginForm.invalid" type="submit" mat-stroked-button (click)="userLogin(loginForm)" 
-        color="accent" class="btn btn-primary"  routerLink="../dashboard" routerLinkActive="active">Login</button>
+        color="accent" class="btn btn-primary">Login</button>
     </div>
+
 </form>
     <a>Not Registered?</a>
     <a class="btn btn-link" routerLink="../register" routerLinkActive="active">Register</a>
-    </mat-card>
+ 
+    <app-alert *ngIf="msg!='none'" [message]="'alert-warning'" (close)="onAlertClose()" >
+      {{msg}}
+    </app-alert>
+  </mat-card>
 
-    
+
   </div>

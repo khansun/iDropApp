@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -10,11 +11,14 @@ import { Observable } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   formGroup: FormGroup;
-
-  private apiURL = "http://localhost:8080/auth/login";
-  constructor (private http: HttpClient) {}
+  msg: string = 'none';
   
 
+  private apiURL = "http://localhost:8080/auth/login";
+  constructor (private http: HttpClient, private router: Router) {
+  sessionStorage.clear(); 
+  }
+  
 
   ngOnInit() {
     this.initForm();
@@ -25,7 +29,9 @@ export class LoginComponent implements OnInit {
       password: new FormControl(''),
     });
   }
-
+  onAlertClose(){
+    this.msg = 'none';
+  }
   userLogin(loginForm: any): void{
     const formValue = loginForm.value;
     console.log(formValue);
@@ -33,25 +39,35 @@ export class LoginComponent implements OnInit {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     }
-    this.http.get(this.apiURL+"?"+"username="+formValue.username+"&password="+formValue.password).subscribe(
+    
+
+    this.http.post(this.apiURL, formValue, { headers: headerDict }).subscribe(
       res => {
-        console.log("GET  ",res)},
-      mockError => {
-        console.log("GET Error", mockError);
+        if(res["status"]==200){
+          sessionStorage.setItem('username',res["username"]);
+          this.router.navigate(['../dashboard']);
+          this.msg = 'none';
+        }
+        else{
+          this.msg = 'Please try again!';
+          // console.log("Please try again");
+        }
+      },
+      (err: HttpErrorResponse) => {
+        if (err['status'] === 401) {
+          this.msg = 'Invalid Credentials';
+          // console.log('Invalid Credentials.');
+        } else {
+          this.msg = 'Invalid Request';
+          // console.log('Invalid Request.');
+        }
       }
-        );
-    ;
-    // this.http.post(this.apiURL, null, { headers: headerDict, params: formValue }).subscribe(
       
-    //   res => {
-    //     console.log("Successful ",formValue);
-    //     console.log( res);
-    //   },
-    //   mockError => {
-    //     console.log("ERROOOOOORRR", formValue);
-    //     console.log('error', mockError);
-    //   }
-    // );
+    );
+      
+
+    
+
 
 
 

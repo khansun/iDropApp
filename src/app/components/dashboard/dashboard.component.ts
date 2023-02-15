@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit{
   public editStudent: Student;
   public pageSlice: Student[] = [];
   public isLoading: boolean = false;
+  public userName = sessionStorage.getItem('username');
 
   
   constructor (private studentService: StudentService) {}
