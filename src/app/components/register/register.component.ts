@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   private roleURL = "http://localhost:8080/auth/roles";
   private apiURL = "http://localhost:8080/auth/user/save";
-  private userRoleURL = "http://localhost:8080/auth/role/addtouser";
+  private mapRoleURL = "http://localhost:8080/auth/role/addtouser";
   constructor (private http: HttpClient, private router: Router) {
     this.http.get(this.roleURL).subscribe(
       res => {        
@@ -62,29 +62,23 @@ export class RegisterComponent implements OnInit {
 
     this.http.post(this.apiURL, addUserDict).subscribe(
       res => {
-        if(res["username"]==formValue.username){
-          sessionStorage.setItem('username',formValue.username);
-          console.log("User added successfully");
-          this.http.post(this.userRoleURL, addUserRoleDict).subscribe(
-            res => {
-                sessionStorage.setItem('role',formValue.role);
-                console.log("Role added successfully");
-              });
-          this.router.navigate(['../dashboard']);
-          this.msg = 'none';
-        }
-        else{
-          this.msg = 'Please try again!';
-          // console.log("Please try again");
-        }
+        sessionStorage.setItem('username',formValue.username);
+
+        this.http.post(this.mapRoleURL, addUserRoleDict).subscribe(
+          res => {
+              sessionStorage.setItem('role',formValue.role);
+            });
+        this.router.navigate(['../dashboard']);
+        this.msg = 'none';
+
       },
       (err: HttpErrorResponse) => {
-        if (err['status'] === 401) {
-          this.msg = 'Invalid Credentials';
-          // console.log('Invalid Credentials.');
+        if (err['status'] === 403) {
+          this.msg = 'Invalid Username';
+
         } else {
           this.msg = 'Invalid Request';
-          // console.log('Invalid Request.');
+
         }
       }
       

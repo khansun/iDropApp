@@ -32,12 +32,13 @@
         <input type="password" ngModel name="password" class="form-control" id="password" placeholder="Password" required>
        </div>
        <div class="modal-footer"  style="display: flex; justify-content: center;">
-       </div>
 
-        <div  style="display: flex; justify-content: center;" >
+          <app-alert *ngIf="msg!='none'" [message]="'alert-warning'" (close)="onAlertClose()" >
+            {{msg}}
+          </app-alert>
           <button [disabled]="registerForm.invalid" type="submit" mat-stroked-button (click)="userRegister(registerForm)" 
           color="accent" class="btn btn-primary">Register</button>
-          
+        
       </div>
     
 
