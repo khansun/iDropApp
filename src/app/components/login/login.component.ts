@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   }
   userLogin(loginForm: any): void{
     const formValue = loginForm.value;
-    console.log(formValue);
+    // console.log(formValue);
     const headerDict = {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'

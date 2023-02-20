@@ -18,7 +18,9 @@
          </div>
          <div class="modal-footer"  style="display: flex; justify-content: center;">
   
-
+          <app-alert *ngIf="msg!='none'" [message]="'alert-warning'" (close)="onAlertClose()" >
+            {{msg}}
+          </app-alert>
 
        <button [disabled]="loginForm.invalid" type="submit" mat-stroked-button (click)="userLogin(loginForm)" 
         color="accent" class="btn btn-primary">Login</button>
@@ -28,9 +30,7 @@
     <a>Not Registered?</a>
     <a class="btn btn-link" routerLink="../register" routerLinkActive="active">Register</a>
  
-    <app-alert *ngIf="msg!='none'" [message]="'alert-warning'" (close)="onAlertClose()" >
-      {{msg}}
-    </app-alert>
+
   </mat-card>
 
 
