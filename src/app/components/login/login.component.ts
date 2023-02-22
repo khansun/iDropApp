@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   formGroup: FormGroup;
   msg: string = 'none';
+
   
 
   private apiURL = "http://localhost:8080/auth/login";
@@ -45,6 +46,7 @@ export class LoginComponent implements OnInit {
       res => {
         if(res["status"]==200){
           sessionStorage.setItem('username',res["username"]);
+          sessionStorage.setItem('token',res["access_token"]);
           this.router.navigate(['../dashboard']);
           this.msg = 'none';
         }

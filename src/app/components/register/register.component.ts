@@ -11,6 +11,7 @@ export class RegisterComponent implements OnInit {
   formGroup: FormGroup;
   msg: string = 'none';
   userRoles: Array<any> = [];
+  
 
   private roleURL = "http://localhost:8080/auth/roles";
   private apiURL = "http://localhost:8080/auth/user/save";
