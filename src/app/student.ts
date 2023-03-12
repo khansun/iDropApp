@@ -4,5 +4,7 @@ export interface Student {
     department: string;
     roomNumber: string;
     phoneNumber: string;
+    dateOfBirth: string;
     photoURL: string;
 }
+

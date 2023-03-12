@@ -1,11 +1,14 @@
 import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { StudentService } from './student.service';
 import { FormsModule } from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserModule,
+  HAMMER_GESTURE_CONFIG
+} from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component'; 
@@ -17,7 +20,8 @@ import {ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { AlertComponent } from './components/alert/alert.component';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +32,7 @@ import { AlertComponent } from './components/alert/alert.component';
   ],
   imports: [
     MatInputModule,
+    MatDatepickerModule,
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
@@ -39,7 +44,11 @@ import { AlertComponent } from './components/alert/alert.component';
     FormsModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule    
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule    
   ],
   providers: [StudentService],
   bootstrap: [AppComponent],

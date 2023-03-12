@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit{
   public pageSlice: Student[] = [];
   public isLoading: boolean = false;
   public userName = sessionStorage.getItem('username').toUpperCase();
+  // public token = sessionStorage.getItem('token');
 
   
   constructor (private studentService: StudentService) {}
@@ -129,5 +130,10 @@ export class DashboardComponent implements OnInit{
     button.click();
     //console.log(student, mode);
 
+  }
+
+  onLogout(){
+    
+    sessionStorage.clear();
   }
 }
